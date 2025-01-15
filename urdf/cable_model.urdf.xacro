@@ -210,21 +210,17 @@
   </joint>
 
   <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-      <parameters>$(find cable_control)/config/cable_controllers.yaml</parameters>
+    <plugin name="CableVelControlPlugin" filename="~/colcon_ws/install/cable_conv/lib/cable_conv/libCableVelControlPlugin.so">
+      <ros>
+        <namespace>/</namespace>
+        <argument>cable_target_position:=/cable_target_position</argument>
+      </ros>
+      <link_name>end_sphere</link_name>
     </plugin>
-  </gazebo>
 
-  <ros2_control name="gazebo_ros2_control" type="system">
-    <hardware>
-      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-    </hardware>
-    <joint name="joint_end_sphere">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-  </ros2_control> 
+    <self_collide>true</self_collide>
+    <static>false</static>
+  </gazebo>
 
 
 </robot>
